@@ -1,3 +1,6 @@
+
+import java.util.Arrays;
+
 public class ProvaStringhe {
 
     public static void main(String[] args) {
@@ -23,6 +26,43 @@ public class ProvaStringhe {
 
         System.out.println("---------------------------------");
 
-        
+        // concatenazione di stringhe
+        String firstName = "Luca";
+        String secondName = "Baratti";
+        System.out.println(firstName + " " + secondName); // stampa "Luca Baratti"
+
+        String firstName1 = "Luca";
+        String secondName2 = "Baratti";
+        System.out.println(firstName1.concat(secondName2)); // stampa "LucaBaratti" senza alcuno spazio
+
+        System.out.println("---------------------------------");
+
+        // String testo = "We are the so-called "Vikings" from the north."; ERRORE! Per
+        // inserire le virgolette i caratteri sono \' o \" o \\
+        String testo = "We are the so-called \"Vikings\" from the north.";
+        System.out.println(testo);
+
+        /*
+         * altre sequenze di escape sono:
+         * \n new line
+         * \r carriage return
+         * \t tabulazione
+         * \b backspace
+         * \f from feed
+         */
+        System.out.println("Prova \n nuova linea");
+        System.out.println("Prova \r carriage return");
+        System.out.println("Prova \t tabulazione");
+        System.out.println("Prova \b back space");
+        System.out.println("Prova \f from feed");
+
+        System.out.println("---------------------------------");
+
+        // per splittare una stringa
+        String stringhetta = "Ciao come stai?";
+        String[] words = stringhetta.split("\\s");
+        System.out.println(Arrays.toString(words));
+
+        System.out.println("---------------------------------");
     }
 }
