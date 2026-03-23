@@ -66,6 +66,8 @@ public class EserciziClassi2 {
         } while (scelta != 5); // se la scelta catturata dallo scanner è 7, esco, altrimenti continuo a
                                // mostrare il menu
 
+        inputDati.close(); // chiudo gli scanner
+        inputScelta.close();
     }
 }
 
