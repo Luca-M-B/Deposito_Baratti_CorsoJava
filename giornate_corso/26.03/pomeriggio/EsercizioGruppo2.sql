@@ -421,3 +421,152 @@ INSERT INTO
 VALUES
     (6, 1, 150.00, 'vip'),
     (7, 3, 200.00, 'golden_circle');
+
+---------------------------------------------------------------------------------------
+-- Query n.7
+-- Mostrare gli sponsor che hanno sponsorizzato performance in almeno 3 giorni diversi.
+SELECT
+    Sponsor.nome,
+    COUNT(DISTINCT Performance.data_esibizione) AS giorni_distinti
+FROM
+    Sponsor
+    JOIN Sponsorizzazione ON Sponsor.id_sponsor = Sponsorizzazione.id_sponsor
+    JOIN Performance ON Sponsorizzazione.id_performance = Performance.id_performance
+GROUP BY
+    Sponsor.id_sponsor,
+    Sponsor.nome
+HAVING
+    COUNT(DISTINCT Performance.data_esibizione) >= 3;
+
+-- Query n.8
+-- Mostrare per ogni giorno il palco con l’incasso più alto.
+-- (subquery o window function)
+SELECT
+    t1.data_esibizione,
+    t1.nome_palco,
+    t1.incasso_totale
+FROM
+    ( -- Calcolo l'incasso di ogni palco per ogni giorno
+        SELECT
+            Performance.data_esibizione,
+            Palco.nome AS nome_palco,
+            SUM(Biglietto.prezzo) AS incasso_totale
+        FROM
+            Performance
+            JOIN Palco ON Performance.id_palco = Palco.id_palco
+            JOIN Biglietto ON Performance.id_performance = Biglietto.id_performance
+        GROUP BY
+            Performance.data_esibizione,
+            Palco.id_palco,
+            Palco.nome
+    ) AS t1
+WHERE
+    t1.incasso_totale = ( -- Trovo l'incasso massimo di quel giorno specifico
+        SELECT
+            MAX(incasso_giornaliero)
+        FROM
+            (
+                SELECT
+                    Performance.data_esibizione,
+                    SUM(Biglietto.prezzo) AS incasso_giornaliero
+                FROM
+                    Performance
+                    JOIN Biglietto ON Performance.id_performance = Biglietto.id_performance
+                GROUP BY
+                    Performance.data_esibizione,
+                    Performance.id_palco
+            ) AS t2
+        WHERE
+            t2.data_esibizione = t1.data_esibizione
+    );
+
+-- Query n.9
+-- Mostrare per ogni giorno il palco con l’incasso più alto.
+-- (subquery o window function)
+WITH
+    IncassiGiornalieri AS (
+        SELECT
+            Performance.data_esibizione,
+            SUM(Biglietto.prezzo) AS incasso_odierno
+        FROM
+            Performance
+            JOIN Biglietto ON Performance.id_performance = Biglietto.id_performance
+        GROUP BY
+            Performance.data_esibizione
+    )
+SELECT
+    data_esibizione,
+    incasso_odierno,
+    LAG (incasso_odierno) OVER (
+        ORDER BY
+            data_esibizione
+    ) AS incasso_precedente,
+    ROUND(
+        (
+            (
+                incasso_odierno - LAG (incasso_odierno) OVER (
+                    ORDER BY
+                        data_esibizione
+                )
+            ) / LAG (incasso_odierno) OVER (
+                ORDER BY
+                    data_esibizione
+            )
+        ) * 100,
+        2
+    ) AS variazione_percentuale
+FROM
+    IncassiGiornalieri;
+
+-- Query n.10
+-- Mostrare gli artisti che
+-- * hanno fatto almeno 3 performance
+-- * hanno collaborato con almeno 2 artisti diversi
+-- * hanno generato incasso sopra la media degli artisti
+-- (subquery annidate multiple + aggregazioni)
+SELECT
+    Artista.id_artista,
+    Artista.nome,
+    COUNT(DISTINCT Performance.id_performance) AS numero_performance,
+    (
+        SELECT
+            COUNT(
+                DISTINCT CASE
+                    WHEN Collaborazione.id_artista1 = Artista.id_artista THEN Collaborazione.id_artista2
+                    ELSE Collaborazione.id_artista1
+                END
+            )
+        FROM
+            Collaborazione
+        WHERE
+            Collaborazione.id_artista1 = Artista.id_artista
+            OR Collaborazione.id_artista2 = Artista.id_artista
+    ) AS numero_collaboratori,
+    SUM(Biglietto.prezzo) AS incasso_totale
+FROM
+    Artista
+    JOIN Performance ON Artista.id_artista = Performance.id_artista
+    JOIN Biglietto ON Performance.id_performance = Biglietto.id_performance
+GROUP BY
+    Artista.id_artista,
+    Artista.nome
+HAVING
+    -- almeno 3 performance
+    COUNT(DISTINCT Performance.id_performance) >= 3
+    -- almeno 2 artisti diversi con cui ha collaborato
+    AND numero_collaboratori >= 2
+    -- incasso sopra la media calcolata su tutti gli artisti che hanno venduto biglietti
+    AND SUM(Biglietto.prezzo) > (
+        SELECT
+            AVG(incasso_artista)
+        FROM
+            (
+                SELECT
+                    SUM(Biglietto.prezzo) AS incasso_artista
+                FROM
+                    Biglietto
+                    JOIN Performance ON Biglietto.id_performance = Performance.id_performance
+                GROUP BY
+                    Performance.id_artista
+            ) AS medie_incassi
+    );
