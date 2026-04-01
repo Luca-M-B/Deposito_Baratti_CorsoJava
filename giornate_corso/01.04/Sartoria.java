@@ -1,6 +1,14 @@
 import java.util.ArrayList;
 import java.util.Scanner;
 
+/*
+avrei voluto utilizzare degli enumeratori per poter stabilire le taglie in modo da 
+non avere taglie S, s, o 44 ma unificandole tutte, almeno per ogni classe se non 
+addirittura generalizzando il tutto.
+Utilizzando una classe Utente che sceglie e compra abiti, avrei anche inserito la possibilità 
+di avere uno sconto nel caso fossero stati acquistati abiti completi o almeno tre elementi.
+*/
+
 class CapiPrincipali extends Capo {
     private String codice;
     private String nome;
@@ -9,7 +17,7 @@ class CapiPrincipali extends Capo {
     private String taglia;
     private double prezzo;
 
-    public CapiPrincipali(String nome, String tessuto, String colore, String taglia, double prezzo) {
+    public CapiPrincipali(String nome, String tessuto, String colore, String taglia, double prezzo) { // costruttore
         setNome(nome);
         setTessuto(tessuto);
         setColore(colore);
@@ -21,7 +29,7 @@ class CapiPrincipali extends Capo {
         this.codice = codice;
     }
 
-    public void setNome(String nome) {
+    public void setNome(String nome) { // controllo nome
         if (nome == null || nome.isEmpty()) {
             System.out.println("Nome non valido");
         }
@@ -32,21 +40,21 @@ class CapiPrincipali extends Capo {
         this.tessuto = tessuto;
     }
 
-    public void setColore(String colore) {
+    public void setColore(String colore) { // controllo colore
         if (colore == null || colore.isEmpty()) {
             System.out.println("Colore non valido");
         }
         this.colore = colore;
     }
 
-    public void setTaglia(String taglia) {
+    public void setTaglia(String taglia) { // controllo taglia
         if (taglia == null || taglia.isEmpty()) {
             System.out.println("Taglia non valida");
         }
         this.taglia = taglia;
     }
 
-    public void setPrezzo(double prezzo) {
+    public void setPrezzo(double prezzo) { // controllo prezzo
         if (prezzo <= 0) {
             System.out.println("Prezzo non valido");
         }
@@ -109,7 +117,7 @@ class CapiSecondari extends Capo {
 }
 
 class Camicia extends CapiPrincipali {
-    private static int contatore = 0; // per codice
+    private static int contatore = 0; // per codici univoci
     private String tipoColletto;
     private String tipoPolsino;
 
@@ -118,7 +126,9 @@ class Camicia extends CapiPrincipali {
 
         super(nome, tessuto, colore, taglia, prezzo);
 
-        String codice = String.format("CAM00AA%02d", ++contatore);
+        String codice = String.format("CAM00AA%02d", ++contatore); // per non avere codici ripetuti e per un eventuale
+                                                                   // ricerca per tipologia (oltre che per classe di
+                                                                   // derivazione)
         setCodice(codice);
 
         if (tipoColletto == null || tipoColletto.isEmpty() ||
@@ -288,7 +298,7 @@ class GestioneSartoria {
 
     private ArrayList<Capo> capi;
 
-    public GestioneSartoria() {
+    public GestioneSartoria() { // nel costruttore inizializzo una lista
         capi = new ArrayList<>();
     }
 
@@ -300,7 +310,7 @@ class GestioneSartoria {
         }
     }
 
-    public void mostraTutto() {
+    public void mostraTutto() { // per mostrare tutti id ettagli dei capi salvati
         System.out.println("\n\tELENCO COMPLETO CAPI");
 
         if (capi.isEmpty()) {
@@ -315,7 +325,7 @@ class GestioneSartoria {
     }
 }
 
-class Capo {
+class Capo { // classe per gestire tutte le restanti classi
     private String codice;
     private String nome;
     private String colore;
@@ -336,7 +346,8 @@ public class Sartoria {
         Scanner scannerMenu = new Scanner(System.in);
         Scanner scannerInput = new Scanner(System.in);
 
-        GestioneSartoria gestione = new GestioneSartoria();
+        GestioneSartoria gestione = new GestioneSartoria(); // creando l'oggetto GestioneSartoria automaticamente
+                                                            // inizializzo anche la sua ArrayList
 
         int scelta;
 
