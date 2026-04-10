@@ -1,0 +1,36 @@
+La coerenza funzionale è la capacità di esecuzione del codice in maniera sempre identica, anche su sistemi e/o macchine con logiche diverse.
+
+Gli operatori sono simboli che permettono di eseguire operzioni e confronti tra due o più variabili. Esistono gli operatori aritmetici, di assegnazione, di confronto, logici e bit a bit.
+Gli operatori aritmetici sono:
++ per sommare dei valori
+- per effettuare una sottrazione tra valori
+* per moltiplicare dei valori
+/ per effettuare una divisione tra valori
+% per trovare il resto (anche fosse zero) di una divisione
+++ e -- rispettivamente per incrementare o diminuire un dato valore;
+Gli operatori di assegnazione sono:
+= serve per assegnare un valore ad una variabile
++=, -=, *=, /= servono tutti per assegnare e eseguire contemporaneamente l'operazione di riferimento sulla stessa variabile (per esempio int a = 20; a += 10; a assume il valore 30);
+Gli operatori di confronto sono:
+> per confrontare se il valore di sx è maggiore del valore di dx
+< per confrontare se il valore di sx è minore di quello di dx
+>= e <= hanno le stesse funzioni di > e < ma includono anche il valore uguale a se stesso
+== è l'operatore di uguaglianza (non assegna nessun valore)
+!= è l'operatore di disuguaglianza;
+Gli operatori logici sono:
+&& detto 'and' (supponendo 'A && B') restituisce true se A e B sono verificati
+|| detto 'or' (supponendo 'A || B') restituisce true se o A, o B o entrambi sono verificati
+! detto 'not' (supponendo '!(A)') restituisce true per il contrario di A
+esistono in questa categoria anche XOR, simile al NOT ma esclude la veridicità di entrambe le affermazioni, e l'AND Bitwise, simile a AND ma fa un check su B anche se A è falso.
+
+Le condizioni sono strutture che permettono di controllare volontariamente il flusso di esecuzione del codice. In base alla verifica di una data condizione il codice al suo interno può essere eseguito o saltato.
+Esiste il blocco IF che può essere seguito da un solo blocco ELSE (non obbligatorio) e da un qualsiasi numero di blocchi ELSE IF posti tra l'IF iniziale e l'eventuale ELSE finale. Il funzionamento è: viene verificata la condizione scritta tra parentesi subito dolo l'IF (if (condizione)) e se questa è vera viene eseguito il codice che segue all'interno delle parentesi graffe; nel caso la condizione sia falsa si passa all'eventuale blocco ELSE IF successivo ed anche qui abbiamo lo stesso procedimento, ovvero, viene controllata la condizione, se vera si esegue quel blocco di codice, altrimenti di pass oltre, fino ad arrivare all'eventuale ELSE finale che è senza condizione e quindi fa si che venga eseguito il suo codice solo se tutte le condizioni precedenti sono risultate false.
+Altra struttura di condizione è lo SWITCH che verifica una sola volta la condizione (switch(condizione)) e se tale condizione è associata ad una corrispondenza detta 'case', viene eseguito il codice all'intero di tale case; se alla fine di un case è presente un 'break' allora non si passa al case successivo, se il break non c'è viene eseguito in maniera consequenziale il blocco di codice successivo e cos' via; può essere presente un 'default' alla fine dei case ma non è obbligatorio.
+
+Le iterazioni sono ripetizioni di codice un n numero di volte, dove n può essere predeterminato o fino al verificarsi di una condizione. Esistono due proncipali metodi per iterare ovvero il FOR e il WHILE (assieme al DO WHILE). Il for permette di eseguire un blocco di codice un numero già deciso di volte, viene scritto in questo modo: for (inizializzazione; condizione; variazione variabile) {codice da eseguire}; l'inizializzazione è l'assegnamento di un valore ad una variabile, la condizione verifica che il valore della variabile sia ancora vero, la variazione aumenta o diminuisce il valore della variabile finquando la condizione non sarà più vera. Il while e il do-while hanno funzionamento simile: il while controlla che la condizione iniziale sia vera affinché possa eseguire il codice (se è falsa non esegue il codice) mentre il do while esegue immediatamente il codice almeno una volta, successivamente continua ad eseguirlo solo le la condizione è vera, altrimenti esce dal blocco. Si scrivono: while (condizione) {codice} oppure do {codice da eseguire almeno una volta} while (condizione).
+
+La principale differenza tra GIT e GIT HUB è che il primo è la capacità tecnologica del tenere traccia di tutta la cronostoria di ciascun file, dal momento della loro creazione fino all'ultima modifica; git hub è invece un prodotto proprietario che attraverso la tecnologia git permette il versionamento del codice.
+
+Le differenze principali tra Array e ArrayList in java sono: la dimensione fissa di Array e la dimensione variabile di ArrayList; gli Array possono contenere al loro inbterno variabili di tipo primitivo mentre gli ArrayList solo oggetti (differenza di esempio: in un Array possono esserci variabili int, in un ArrayList oggetti Integer); gli ArrayList devo essere importati per essere utilizzati; i metodi per lavorare su Array e su ArrayList sono diversi.
+
+I tipi non basilari sono tutti i tipi che possono assumere le variabili ma non sono tipi primitivi. Sono quindi tipi non basilari String e tutti gli oggetti creati da classi.
