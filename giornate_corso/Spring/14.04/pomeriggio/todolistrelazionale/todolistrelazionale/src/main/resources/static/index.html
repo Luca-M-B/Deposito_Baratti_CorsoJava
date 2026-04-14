@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TaskFlow | Produttività Relazionale</title>
+    <!-- Modern Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div class="logo">
+                <h1>TaskFlow.</h1>
+            </div>
+            <div class="header-btns">
+                <button class="btn-secondary" onclick="openUserModal()" style="padding: 0.75rem 1.5rem; margin-right: 1rem;">
+                    <i class="fas fa-user-plus"></i> NUOVO UTENTE
+                </button>
+                <button class="btn-primary" onclick="openTodoModal()" style="padding: 0.75rem 1.5rem;">
+                    <i class="fas fa-plus"></i> NUOVA MISSIONE
+                </button>
+            </div>
+        </header>
+
+        <section class="user-section">
+            <h2>SELEZIONA OPERATIVO</h2>
+            <div class="user-bar" id="userBar">
+                <!-- Chips dinamici -->
+            </div>
+        </section>
+
+        <main class="todo-grid" id="todoGrid">
+            <!-- Card dinamiche -->
+        </main>
+    </div>
+
+    <!-- Modal Todo -->
+    <div class="modal" id="taskModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 id="modalTitle">Nuova Missione</h2>
+                <button onclick="closeModal('taskModal')" class="close-btn"><i class="fas fa-times"></i></button>
+            </div>
+            <form id="taskForm">
+                <input type="hidden" id="taskId">
+                <div class="form-group">
+                    <label>OBIETTIVO</label>
+                    <input type="text" id="taskNome" placeholder="es. Conquistare il mondo" required>
+                </div>
+                <div class="form-group">
+                    <label>DETTAGLI</label>
+                    <textarea id="taskDesc" placeholder="Descrivi i dettagli della missione..." rows="4"></textarea>
+                </div>
+                <div class="form-group">
+                    <label>OPERATIVO ASSEGNATO</label>
+                    <select id="taskUtente" required>
+                        <!-- Opzioni iniettate -->
+                    </select>
+                </div>
+                <div class="form-group checkbox-group">
+                    <input type="checkbox" id="taskCompletato">
+                    <label for="taskCompletato">MISSIONE COMPIUTA</label>
+                </div>
+                <button type="submit" class="btn-primary full-width">SALVA MISSIONE</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Modal Utente -->
+    <div class="modal" id="userModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Aggiungi Operativo</h2>
+                <button onclick="closeModal('userModal')" class="close-btn"><i class="fas fa-times"></i></button>
+            </div>
+            <form id="userForm">
+                <div class="form-group">
+                    <label>NOME OPERATIVO</label>
+                    <input type="text" id="userNome" placeholder="es. Mario Rossi" required>
+                </div>
+                <button type="submit" class="btn-primary full-width">RECLUTA UTENTE</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Messaggio di notifica -->
+    <div id="toast" class="toast"></div>
+
+    <script src="app.js"></script>
+</body>
+</html>

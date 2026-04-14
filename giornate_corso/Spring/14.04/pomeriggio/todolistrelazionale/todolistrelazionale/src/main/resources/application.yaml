@@ -3,7 +3,7 @@ spring:
     name: todolist
 
   datasource:
-    url: jdbc:mysql://localhost:3306/todolist
+    url: jdbc:mysql://localhost:3306/todolistrelazionale?createDatabaseIfNotExist=true
     username: root
     password:
     driver-class-name: com.mysql.cj.jdbc.Driver
