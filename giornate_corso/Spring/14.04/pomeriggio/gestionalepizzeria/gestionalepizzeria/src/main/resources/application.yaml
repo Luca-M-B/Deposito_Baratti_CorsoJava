@@ -1,3 +1,18 @@
 spring:
   application:
     name: gestionalepizzeria
+
+  datasource:
+    url: jdbc:mysql://localhost:3306/gestionalepizzeria?createDatabaseIfNotExist=true
+    username: root
+    password:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+
+  jpa:
+    database-platform:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+
+server:
+  port: 8086

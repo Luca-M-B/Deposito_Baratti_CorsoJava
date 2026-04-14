@@ -8,6 +8,8 @@ public class GestionalepizzeriaApplication {
 
 	public static void main(String[] args) {
 		SpringApplication.run(GestionalepizzeriaApplication.class, args);
+
+		System.out.println("\n\n\t---- --- -- -- PROGRAMMA RUNNATO -- -- --- ----\n\n");
 	}
 
 }
