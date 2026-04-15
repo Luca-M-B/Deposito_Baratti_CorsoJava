@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" 
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+      th:replace="~{fragments/layout :: main-layout(~{::section})}">
+<body>
+    <section>
+        <div class="container" style="padding-top: 5rem; padding-bottom: 5rem">
+            <div class="text-center" style="max-width: 800px; margin: 0 auto">
+                <h1 style="font-size: 3.5rem">Sicurezza e Design<br><span style="color: var(--accent)">In un'unica soluzione</span></h1>
+                <p style="font-size: 1.25rem; margin-bottom: 2.5rem">Benvenuto in SecurePortal. Un ambiente protetto, elegante e progettato per offrirti il massimo della tranquillità durante la navigazione.</p>
+                <div style="display: flex; gap: 1rem; justify-content: center">
+                    <a th:href="@{/public/hello}" class="btn btn-primary">Esplora l'area Pubblica</a>
+                    <a th:href="@{/login}" sec:authorize="!isAuthenticated()" class="btn btn-accent">Accedi al Portale</a>
+                </div>
+            </div>
+
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem; margin-top: 5rem">
+                <div class="card">
+                    <h3 style="margin-bottom: 1rem; color: var(--primary)">Privacy Garantita</h3>
+                    <p>I tuoi dati sono protetti dai più alti standard di sicurezza e crittografia.</p>
+                </div>
+                <div class="card">
+                    <h3 style="margin-bottom: 1rem; color: var(--primary)">Esperienza Fluida</h3>
+                    <p>Un'interfaccia studiata per minimizzare le distrazioni e massimizzare la produttività.</p>
+                </div>
+                <div class="card">
+                    <h3 style="margin-bottom: 1rem; color: var(--primary)">Supporto Dedicato</h3>
+                    <p>Siamo qui per aiutarti in ogni fase della tua esperienza professionale.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+</body>
+</html>
