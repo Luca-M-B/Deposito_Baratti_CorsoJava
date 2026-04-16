@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Premium ToDo List</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <!-- Auth View -->
+        <div id="auth-view" class="card fade-in">
+            <h1 class="title">Benvenuto</h1>
+            <p class="subtitle">Gestisci i tuoi impegni con stile</p>
+            
+            <div class="tab-container">
+                <button id="login-tab" class="tab active" onclick="showForm('login')">Login</button>
+                <button id="register-tab" class="tab" onclick="showForm('register')">Registrati</button>
+            </div>
+
+            <form id="login-form" class="auth-form animate-slide-up">
+                <div class="input-group">
+                    <input type="text" id="login-username" placeholder="Username" required>
+                </div>
+                <div class="input-group">
+                    <input type="password" id="login-password" placeholder="Password" required>
+                </div>
+                <button type="submit" class="btn btn-primary">Entra</button>
+            </form>
+
+            <form id="register-form" class="auth-form animate-slide-up hidden">
+                <div class="input-group">
+                    <input type="text" id="reg-username" placeholder="Scegli Username" required>
+                </div>
+                <div class="input-group">
+                    <input type="password" id="reg-password" placeholder="Scegli Password" required>
+                </div>
+                <div class="input-group">
+                    <select id="reg-ruolo">
+                        <option value="USER">Utente Standard</option>
+                        <option value="ADMIN">Amministratore</option>
+                    </select>
+                </div>
+                <button type="submit" class="btn btn-primary">Registrati</button>
+            </form>
+            <div id="auth-message" class="message"></div>
+        </div>
+
+        <!-- App View -->
+        <div id="app-view" class="fade-in hidden">
+            <header class="app-header">
+                <div>
+                    <h1 class="title-small">I Miei ToDo</h1>
+                    <p id="user-greeting" class="subtitle-small"></p>
+                </div>
+                <button id="logout-btn" class="btn btn-outline" onclick="logout()">Logout</button>
+            </header>
+
+            <section class="todo-input-section card">
+                <form id="todo-form">
+                    <input type="text" id="todo-name" placeholder="Cosa devi fare oggi?" required>
+                    <input type="text" id="todo-desc" placeholder="Aggiungi una descrizione...">
+                    <button type="submit" class="btn btn-add">
+                        <span class="plus-icon">+</span> Aggiungi
+                    </button>
+                </form>
+            </section>
+
+            <section id="todo-list" class="todo-grid">
+                <!-- Todos dynamically injected here -->
+            </section>
+        </div>
+    </div>
+
+    <!-- Error Toast -->
+    <div id="toast" class="toast hidden"></div>
+
+    <script src="js/app.js"></script>
+</body>
+</html>

@@ -1,0 +1,24 @@
+spring:
+  application:
+    name: todolistautenticazione
+
+  # Configurazione Database
+  datasource:
+    url: jdbc:mysql://localhost:3306/todolist?createDatabaseIfNotExist=true
+    username: root
+    password:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+
+  # Configurazione JPA / Hibernate
+  jpa:
+    database-platform: org.hibernate.dialect.MySQLDialect
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+
+jwt:
+  secret: mysupersecretkey1234567890abcdef
+  expiration: 86400000 # 1 giorno in millisecondi
+
+server:
+  port: 8080

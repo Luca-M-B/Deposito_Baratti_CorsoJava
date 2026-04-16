@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" th:replace="~{fragments/layout :: main-layout(~{::section})}">
+<body>
+    <section>
+        <div class="auth-wrapper">
+            <div class="card auth-card">
+                <div class="text-center mb-4" style="margin-bottom: 2rem">
+                    <h2 style="color: var(--primary); font-size: 1.75rem">Bentornato</h2>
+                    <p style="font-size: 0.875rem">Accedi per gestire il tuo profilo</p>
+                </div>
+
+                <div th:if="${param.error}" class="card" style="background: #fef2f2; border-color: #fecaca; padding: 1rem; margin-bottom: 1.5rem">
+                    <p style="color: #991b1b; font-size: 0.875rem; margin-bottom:0">Username o password non validi.</p>
+                </div>
+                <div th:if="${param.logout}" class="card" style="background: #ecfdf5; border-color: #a7f3d0; padding: 1rem; margin-bottom: 1.5rem">
+                    <p style="color: #065f46; font-size: 0.875rem; margin-bottom:0">Logout effettuato con successo.</p>
+                </div>
+
+                <form th:action="@{/login}" method="post">
+                    <div class="form-group">
+                        <label for="username">Username</label>
+                        <input type="text" id="username" name="username" class="form-input" placeholder="admin" required autofocus>
+                    </div>
+                    <div class="form-group">
+                        <label for="password">Password</label>
+                        <input type="password" id="password" name="password" class="form-input" placeholder="••••••••" required>
+                    </div>
+                    <button type="submit" class="btn btn-primary full-width mt-4">Accedi al Portale</button>
+                </form>
+
+                <div class="text-center mt-4" style="margin-top: 2rem">
+                    <p style="font-size: 0.75rem">Problemi ad accedere? Contatta l'amministratore.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+</body>
+</html>
