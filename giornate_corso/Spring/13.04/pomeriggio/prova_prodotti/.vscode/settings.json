@@ -17,5 +17,6 @@
             "request": "launch",
             "mainClass": "${file}"
         }
-    ]
+    ],
+    "java.compile.nullAnalysis.mode": "automatic"
 }
